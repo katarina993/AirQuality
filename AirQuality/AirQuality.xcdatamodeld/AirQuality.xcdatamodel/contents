@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17192" systemVersion="19F101" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CoordinatesLocal" representedClassName="CoordinatesLocal" syncable="YES" codeGenerationType="class">
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="measurement" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="MeasurementsLocal" inverseName="coordinate" inverseEntity="MeasurementsLocal"/>
+    </entity>
+    <entity name="DateLocal" representedClassName="DateLocal" syncable="YES" codeGenerationType="class">
+        <attribute name="local" optional="YES" attributeType="String"/>
+        <attribute name="utc" optional="YES" attributeType="String"/>
+        <relationship name="measurement2" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MeasurementsLocal" inverseName="date" inverseEntity="MeasurementsLocal"/>
+    </entity>
+    <entity name="MeasurementsLocal" representedClassName="MeasurementsLocal" syncable="YES" codeGenerationType="class">
+        <attribute name="city" optional="YES" attributeType="String"/>
+        <attribute name="country" optional="YES" attributeType="String"/>
+        <attribute name="countryName" optional="YES" attributeType="String"/>
+        <attribute name="location" optional="YES" attributeType="String"/>
+        <attribute name="parametar" optional="YES" attributeType="String"/>
+        <attribute name="unit" optional="YES" attributeType="String"/>
+        <attribute name="value" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="coordinate" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CoordinatesLocal" inverseName="measurement" inverseEntity="CoordinatesLocal"/>
+        <relationship name="date" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DateLocal" inverseName="measurement2" inverseEntity="DateLocal"/>
+    </entity>
+    <elements>
+        <element name="CoordinatesLocal" positionX="211.48046875" positionY="129.98046875" width="128" height="88"/>
+        <element name="DateLocal" positionX="141.2890625" positionY="-44.296875" width="128" height="88"/>
+        <element name="MeasurementsLocal" positionX="-28.86328125" positionY="-28.37890625" width="128" height="178"/>
+    </elements>
+</model>
