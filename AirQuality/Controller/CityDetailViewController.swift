@@ -13,7 +13,7 @@ import UIKit
 class CityDetailViewController: UIViewController {
     
     
-    var cityD: City?
+    var cityD: String?
     var measurements = [Measurements]()
     
     
@@ -23,7 +23,7 @@ class CityDetailViewController: UIViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = cityD?.name
+        self.title = cityD
         let date = Date()
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
@@ -36,7 +36,7 @@ class CityDetailViewController: UIViewController {
         if cityD != nil {
             let measurementF = DataBaseManager.shared.fetchMeasurementsFromCoreData()
             if measurementF.isEmpty  {
-            DataController.shared.getMeasurementsFromPeriodFromAPI(city:cityD!.name ,parameter:"pm25", sort: "asc", date_from: dateFromString, date_to:dateToString){(measurements) in
+            DataController.shared.getMeasurementsFromPeriodFromAPI(city:cityD ,parameter:"pm25", sort: "asc", date_from: dateFromString, date_to:dateToString){(measurements) in
                 if measurements != nil{
                     var measurmentsByDates = [Measurements]()
                     for y in measurements! {

@@ -11,10 +11,8 @@ import CoreData
 
 class MyPlaceViewController: UIViewController {
     
-    var city: City?
-    var cities = [City]()
-    var measurements = [Measurements]()
-    
+    var selectedCity: String?
+    var places = [Place]()
 
     @IBAction func AddPlaceButton(_ sender: Any) {
         let main = UIStoryboard(name: "Main", bundle: nil)
@@ -26,44 +24,56 @@ class MyPlaceViewController: UIViewController {
     @IBOutlet weak var placeTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        if city != nil {
-            DataController.shared.getMeasurementsFromAPI(city:city?.name,parameter:"pm25", sort: "asc") { (measurements) in
+        if selectedCity != nil {
+            DataController.shared.getMeasurementsFromAPI(city:selectedCity,parameter:"pm25", sort: "asc") { [self] (measurements) in
                 if measurements != nil && !measurements!.isEmpty{
-                    self.measurements.append(measurements!.first!)
+                    let dateCurrent = Date()
+                    let measurement = measurements?.first
+                    let place = Place(city:measurement!.city, measurementDate: measurement!.date, measurementValue: measurement!.value, updatedAt: dateCurrent )
                     self.fetchCountries { countries in
                         if countries != nil {
-                            let countryName = countries!.filter{$0.code ==
-                                self.measurements[0].country}.first?.name
-                            self.measurements[0].countryName = countryName
+                            let countryName = countries!.filter{$0.code == measurement?.country}.first?.name
+                            measurement?.countryName = countryName
+                            place.countryName = countryName
+                            self.places.append(place)
+                            
+                            DataBaseManager.shared.savePlaces(places: place)
                             DispatchQueue.main.async {
                                 self.placeTableView.reloadData()
+                                
                             }
+                            
                         }
+                        
                     }
+                    
                 } else {
                    //greska
+                    
                 }
-        }
+                
+            }
             
-           
-}
-}
+        }
+        
     }
+    
+}
 
 extension MyPlaceViewController: UITableViewDelegate,UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return measurements.count
+        return places.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CityInformation", for: indexPath) as! MyPlaceTableViewCell
         
-        cell.cityNameLabel.text = measurements[indexPath.row].city
-        cell.airQualityLabel.text = String(measurements[indexPath.row].value)
-        let measurmentDate = measurements[indexPath.row].date.local
+        cell.cityNameLabel.text = places[indexPath.row].city
+        cell.airQualityLabel.text = String(places[indexPath.row].measurementValue)
+        let measurmentDate = places[indexPath.row].measurementDate.local
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         let date = dateFormatter.date(from:measurmentDate)
@@ -76,14 +86,14 @@ extension MyPlaceViewController: UITableViewDelegate,UITableViewDataSource {
 //        formatter.dateFormat  = "EEEE" // "EE" to get short style
 //        let dayInWeek = formatter.string(from: now)
         
-        cell.countryNameLabel.text = measurements[indexPath.row].countryName
+        cell.countryNameLabel.text = places[indexPath.row].countryName
         return cell
      }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 150.0
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedCity = city
+        let selectedCity =  self.places[indexPath.row].city
         let vc = storyboard?.instantiateViewController(identifier: "cityDetail") as! CityDetailViewController
         vc.cityD = selectedCity
         self.navigationController?.pushViewController(vc, animated: true)

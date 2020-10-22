@@ -9,6 +9,7 @@
         <attribute name="local" optional="YES" attributeType="String"/>
         <attribute name="utc" optional="YES" attributeType="String"/>
         <relationship name="measurement2" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="MeasurementsLocal" inverseName="date" inverseEntity="MeasurementsLocal"/>
+        <relationship name="place" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PlacesLocal" inverseName="measurementDate" inverseEntity="PlacesLocal"/>
     </entity>
     <entity name="MeasurementsLocal" representedClassName="MeasurementsLocal" syncable="YES" codeGenerationType="class">
         <attribute name="city" optional="YES" attributeType="String"/>
@@ -21,9 +22,17 @@
         <relationship name="coordinate" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CoordinatesLocal" inverseName="measurement" inverseEntity="CoordinatesLocal"/>
         <relationship name="date" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DateLocal" inverseName="measurement2" inverseEntity="DateLocal"/>
     </entity>
+    <entity name="PlacesLocal" representedClassName="PlacesLocal" syncable="YES" codeGenerationType="class">
+        <attribute name="city" optional="YES" attributeType="String"/>
+        <attribute name="countryName" optional="YES" attributeType="String"/>
+        <attribute name="measurementValue" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="measurementDate" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DateLocal" inverseName="place" inverseEntity="DateLocal"/>
+    </entity>
     <elements>
         <element name="CoordinatesLocal" positionX="211.48046875" positionY="129.98046875" width="128" height="88"/>
-        <element name="DateLocal" positionX="141.2890625" positionY="-44.296875" width="128" height="88"/>
+        <element name="DateLocal" positionX="141.2890625" positionY="-44.296875" width="128" height="103"/>
         <element name="MeasurementsLocal" positionX="-28.86328125" positionY="-28.37890625" width="128" height="178"/>
+        <element name="PlacesLocal" positionX="391.046875" positionY="-14.57421875" width="128" height="118"/>
     </elements>
 </model>

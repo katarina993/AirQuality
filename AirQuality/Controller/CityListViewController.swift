@@ -65,10 +65,10 @@ class CityListViewController: UIViewController, UITableViewDelegate, UITableView
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let ac = UIAlertController(title: "Do you want to add this city to your favorite list?", message: "", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "Ok", style: .default) { (_) in
-            let selectedCity = self.cities[indexPath.row]
+            let selectedCity = self.cities[indexPath.row].name
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "firstVC") as! MyPlaceViewController
-            vc.city = selectedCity
+            vc.selectedCity = selectedCity
             self.navigationController?.pushViewController(vc, animated: true)
             
         }

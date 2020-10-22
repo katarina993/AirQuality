@@ -22,6 +22,7 @@ class DataBaseManager: NSObject {
 //        }
     }
     
+    //MARK: MEASUREMENTS
     
     func saveMeasurements(measurements:Measurements) -> MeasurementsLocal {
         let managedContext = getContext()!
@@ -52,12 +53,6 @@ class DataBaseManager: NSObject {
         return measurmentsLocal
     
     }
-    func retrieveMeasurements() -> [NSManagedObject] {
-            let managedContext = getContext()
-            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "MeasurementsLocal")
-            let result = try! managedContext?.fetch(fetchRequest) as! [NSManagedObject]
-            return result
-        }
     
     func saveListMeasurementsLocal(measurements: [Measurements]) {
         var measurementsArrayLocal = [MeasurementsLocal]()
@@ -114,4 +109,73 @@ class DataBaseManager: NSObject {
         return measurementArray
     }
     
+    //MARK: PLACES
+    
+    func savePlaces(places:Place) -> PlacesLocal {
+        let managedContext = getContext()!
+        let placesLocal = PlacesLocal(context: managedContext)
+        placesLocal.city = places.city
+        placesLocal.countryName = places.countryName
+        placesLocal.measurementValue = places.measurementValue
+        placesLocal.updatedAt = places.updatedAt
+        
+        let dateLocal = DateLocal(context: managedContext)
+        dateLocal.local = places.measurementDate.local
+        dateLocal.utc = places.measurementDate.utc
+        placesLocal.measurementDate = dateLocal
+        do {
+            try managedContext.save()
+            
+        }
+        catch let error as NSError {
+            print("Could not save. \(error)")
+            
+        }
+       return placesLocal
+    }
+    
+    func saveListPlacesLocal(places: [Place]) -> [PlacesLocal] {
+        var placesArrayLocal = [PlacesLocal]()
+        for place in places {
+           let placeLocal = self.savePlaces(places: place)
+            placesArrayLocal.append(placeLocal)
+            
+        }
+        return placesArrayLocal
+    }
+    
+    func fetchPlacesFromCoreData() -> [Place] {
+        let managedContext = getContext()
+        let placeFetchRequest = NSFetchRequest<PlacesLocal>(entityName: "PlacesLocal")
+        
+        do {
+            let placesLocal = try managedContext!.fetch(placeFetchRequest)
+            print(placesLocal)
+            let places = self.convertToListPlaces(placesLocalList: placesLocal)
+           return places
+        }
+        catch let error as NSError {
+            print("Could not fetch. \(error)")
+            return []
+        }
+       
+        }
+    
+    func convertPlacesLocalToPlaces(placeLocal: PlacesLocal) -> Place {
+        let date = MeasurementsDate(utc: (placeLocal.measurementDate?.utc)!, local: (placeLocal.measurementDate?.local)!)
+        let place = Place(city: placeLocal.city!, measurementDate: date, measurementValue: placeLocal.measurementValue, updatedAt: placeLocal.updatedAt!)
+        return place
+        
+    }
+    
+    func convertToListPlaces(placesLocalList: [PlacesLocal]) -> [Place] {
+       var placesArray = [Place]()
+        for y in placesLocalList {
+            let place = self.convertPlacesLocalToPlaces(placeLocal: y)
+            placesArray.append(place)
+        }
+        return placesArray
+    }
+    
 }
+
