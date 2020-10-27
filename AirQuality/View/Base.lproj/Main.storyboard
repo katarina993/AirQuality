@@ -3,7 +3,7 @@
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17125"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17126"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
@@ -38,16 +38,16 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wlu-tI-N27">
-                                                    <rect key="frame" x="30" y="26" width="100" height="20.5"/>
+                                                    <rect key="frame" x="30" y="26" width="140" height="20.5"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="100" id="IAD-eN-edw"/>
+                                                        <constraint firstAttribute="width" constant="140" id="IAD-eN-edw"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Country" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0tf-Ik-G8O">
-                                                    <rect key="frame" x="30" y="71.5" width="177" height="21"/>
+                                                    <rect key="frame" x="30" y="71.5" width="164" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="177" id="fff-jr-IyH"/>
                                                     </constraints>
@@ -65,13 +65,10 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="AirQuality" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S31-1b-NZH">
-                                                    <rect key="frame" x="307" y="31" width="77" height="80"/>
+                                                    <rect key="frame" x="294" y="31" width="90" height="80"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="77" id="STf-dR-POR"/>
-                                                        <constraint firstAttribute="width" constant="77" id="Xhf-2Z-lRd"/>
+                                                        <constraint firstAttribute="width" constant="90" id="Xhf-2Z-lRd"/>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="62" id="Xru-Tr-cRF"/>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="50" id="h33-ME-DCP"/>
-                                                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="100" id="nJb-sK-1TY"/>
                                                         <constraint firstAttribute="height" constant="62" id="pYR-7l-wDq"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
@@ -274,14 +271,14 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CityListIdentifier" id="gxY-VG-UFK" customClass="CityListTableViewCell" customModule="AirQuality" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="28" width="414" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gxY-VG-UFK" id="JX3-cn-p2C">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nMS-r8-5kP">
-                                                    <rect key="frame" x="70" y="11" width="77" height="21.5"/>
+                                                    <rect key="frame" x="70" y="11" width="77" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>

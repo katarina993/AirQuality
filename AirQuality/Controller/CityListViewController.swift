@@ -28,11 +28,6 @@ class CityListViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewDidLoad() {
         super.viewDidLoad()
         self.chooseCountryButton.isEnabled = false
-//        DataController.shared.getCitiesFromAPI(countryCode: "RS") { cities in
-//            self.cities = cities!
-//            DispatchQueue.main.async {
-//                self.citiesTableView.reloadData()
-//            }
         DataController.shared.getCountriesFromAPI() { countries in
             if countries != nil {
                 self.countries = countries!
@@ -68,7 +63,7 @@ class CityListViewController: UIViewController, UITableViewDelegate, UITableView
             let selectedCity = self.cities[indexPath.row].name
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc = storyboard.instantiateViewController(withIdentifier: "firstVC") as! MyPlaceViewController
-            vc.selectedCity = selectedCity
+            vc.selectedCityName = selectedCity
             self.navigationController?.pushViewController(vc, animated: true)
             
         }
@@ -76,7 +71,7 @@ class CityListViewController: UIViewController, UITableViewDelegate, UITableView
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
         ac.addAction(cancelAction)
         present(ac, animated: true, completion: nil)
-        }
+    }
     
 }
 

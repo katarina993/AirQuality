@@ -11,7 +11,7 @@ import CoreData
 
 class MyPlaceViewController: UIViewController {
     
-    var selectedCity: String?
+    var selectedCityName: String?
     var places = [Place]()
 
     @IBAction func AddPlaceButton(_ sender: Any) {
@@ -24,41 +24,57 @@ class MyPlaceViewController: UIViewController {
     @IBOutlet weak var placeTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        if selectedCity != nil {
-            DataController.shared.getMeasurementsFromAPI(city:selectedCity,parameter:"pm25", sort: "asc") { [self] (measurements) in
-                if measurements != nil && !measurements!.isEmpty{
-                    let dateCurrent = Date()
-                    let measurement = measurements?.first
-                    let place = Place(city:measurement!.city, measurementDate: measurement!.date, measurementValue: measurement!.value, updatedAt: dateCurrent )
-                    self.fetchCountries { countries in
-                        if countries != nil {
-                            let countryName = countries!.filter{$0.code == measurement?.country}.first?.name
-                            measurement?.countryName = countryName
-                            place.countryName = countryName
-                            self.places.append(place)
-                            
-                            DataBaseManager.shared.savePlaces(places: place)
-                            DispatchQueue.main.async {
-                                self.placeTableView.reloadData()
-                                
-                            }
-                            
+        navigationItem.hidesBackButton = true
+        let placesDB = DataBaseManager.shared.fetchPlacesFromCoreData()
+        if selectedCityName != nil  {
+            if placesDB.isEmpty {
+                self.fetchMeasurmentPlaceAndReloadData()
+            }
+            else {
+                for placeDB in placesDB{
+                    if placeDB.city == selectedCityName {
+                        self.places = placesDB
+                        DispatchQueue.main.async {
+                            self.placeTableView.reloadData()
                         }
-                        
+                        return
                     }
-                    
-                } else {
-                   //greska
-                    
                 }
+                fetchMeasurmentPlaceAndReloadData()
                 
             }
-            
+        } else {
+            self.places = placesDB
+            DispatchQueue.main.async {
+                self.placeTableView.reloadData()
+            }
         }
-        
     }
     
+    func fetchMeasurmentPlaceAndReloadData(){
+        DataController.shared.getMeasurementsFromAPI(city:selectedCityName,parameter:"pm25", sort: "asc") { [self] (measurements) in
+            if measurements != nil && !measurements!.isEmpty{
+                let dateCurrent = Date()
+                let measurement = measurements?.first
+                let place = Place(city:measurement!.city, measurementDate: measurement!.date, measurementValue: measurement!.value, updatedAt: dateCurrent )
+                self.fetchCountries { countries in
+                    if countries != nil {
+                        let countryName = countries!.filter{$0.code == measurement?.country}.first?.name
+                        measurement?.countryName = countryName
+                        place.countryName = countryName
+                        DataBaseManager.shared.savePlaces(places: place)
+                        self.places = DataBaseManager.shared.fetchPlacesFromCoreData()
+                        DispatchQueue.main.async {
+                            self.placeTableView.reloadData()
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
+    
+
 
 extension MyPlaceViewController: UITableViewDelegate,UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -72,7 +88,9 @@ extension MyPlaceViewController: UITableViewDelegate,UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CityInformation", for: indexPath) as! MyPlaceTableViewCell
         
         cell.cityNameLabel.text = places[indexPath.row].city
-        cell.airQualityLabel.text = String(places[indexPath.row].measurementValue)
+        
+        let y = Double(round(100*places[indexPath.row].measurementValue)/100)
+        cell.airQualityLabel.text = String(y)
         let measurmentDate = places[indexPath.row].measurementDate.local
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
@@ -80,12 +98,6 @@ extension MyPlaceViewController: UITableViewDelegate,UITableViewDataSource {
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let finalDateStrint = dateFormatter.string(from:date!)
         cell.dateLabel.text = finalDateStrint
-        
-//        let now = Date()
-//        let formatter = DateFormatter()
-//        formatter.dateFormat  = "EEEE" // "EE" to get short style
-//        let dayInWeek = formatter.string(from: now)
-        
         cell.countryNameLabel.text = places[indexPath.row].countryName
         return cell
      }
@@ -95,9 +107,11 @@ extension MyPlaceViewController: UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedCity =  self.places[indexPath.row].city
         let vc = storyboard?.instantiateViewController(identifier: "cityDetail") as! CityDetailViewController
-        vc.cityD = selectedCity
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
+            vc.cityD = selectedCity
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        
+    
      
     func fetchCountries(completion: @escaping ([Country]?) -> Void){
         DataController.shared.getCountriesFromAPI{ (countries) in
@@ -108,4 +122,7 @@ extension MyPlaceViewController: UITableViewDelegate,UITableViewDataSource {
 
 }
 
+
+
+    
 
