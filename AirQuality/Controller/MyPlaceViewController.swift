@@ -50,10 +50,15 @@ class MyPlaceViewController: UIViewController {
                 
             }
         } else {
-            self.places = placesDB
-            self.searchPlaces = self.places
-            DispatchQueue.main.async {
-                self.placeTableView.reloadData()
+            if placesDB.isEmpty {
+                self.placeSearchBar.isHidden = true
+            } else {
+                self.places = placesDB
+                self.searchPlaces = self.places
+                DispatchQueue.main.async {
+                    self.placeTableView.reloadData()
+            }
+            
             }
         }
     
