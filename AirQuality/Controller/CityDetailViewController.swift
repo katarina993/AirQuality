@@ -12,18 +12,46 @@ import UIKit
 
 class CityDetailViewController: UIViewController {
     
-    
-    var cityD: String?
+    var cityName: String?
     var measurements = [Measurements]()
-    
-    
     
     @IBOutlet weak var cityDetailTableView: UITableView!
     
-   
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = cityD
+        self.title = cityName
+        let measurementsDB = DataBaseManager.shared.fetchMeasurementsFromCoreData()
+        if cityName != nil {
+            if measurementsDB.isEmpty  {
+                self.fetchMeasurmentCityAndReloadData()
+                
+            } else {
+                for measurementDB in measurementsDB {
+                    if measurementDB.city == cityName {
+                        self.measurements = measurementsDB
+                        DispatchQueue.main.async {
+                            self.cityDetailTableView.reloadData()
+                            
+                        }
+                        return
+                    }
+                    
+                }
+                self.fetchMeasurmentCityAndReloadData()
+                
+            }
+            
+        } else {
+            self.measurements = measurementsDB
+            DispatchQueue.main.async {
+                self.cityDetailTableView.reloadData()
+                }
+                
+            }
+    
+        }
+    
+    func fetchMeasurmentCityAndReloadData() {
         let date = Date()
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd"
@@ -32,84 +60,64 @@ class CityDetailViewController: UIViewController {
         formatter.dateFormat = "yyyy-MM-dd"
         let dateFromString = formatter.string(from: newDate!)
         print(dateFromString)
-        
-        if cityD != nil {
-            let measurementF = DataBaseManager.shared.fetchMeasurementsFromCoreData()
-            if measurementF.isEmpty  {
-            DataController.shared.getMeasurementsFromPeriodFromAPI(city:cityD ,parameter:"pm25", sort: "asc", date_from: dateFromString, date_to:dateToString){(measurements) in
-                if measurements != nil{
-                    var measurmentsByDates = [Measurements]()
-                    for y in measurements! {
-                        let x = y.date.utc
-                        let inputFormatter = DateFormatter()
-                        inputFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-                        let showDate = inputFormatter.date(from:x)
-                        inputFormatter.dateFormat = "yyyy-MM-dd"
-                        let resultString = inputFormatter.string(from: showDate!)
-                        print(resultString)
-                        if resultString == dateToString {
-                            measurmentsByDates.append(y)
-                           break
-                        }
+        DataController.shared.getMeasurementsFromPeriodFromAPI(city:cityName ,parameter:"pm25", sort: "asc", date_from: dateFromString, date_to:dateToString){(measurements) in
+            if measurements != nil{
+                var measurmentsByDates = [Measurements]()
+                for y in measurements! {
+                    let x = y.date.utc
+                    let inputFormatter = DateFormatter()
+                    inputFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+                    let showDate = inputFormatter.date(from:x)
+                    inputFormatter.dateFormat = "yyyy-MM-dd"
+                    let resultString = inputFormatter.string(from: showDate!)
+                    print(resultString)
+                    if resultString == dateToString {
+                        measurmentsByDates.append(y)
+                       break
                     }
-                    var value = -1
-                    let now = Date()
+                }
+                var value = -1
+                let now = Date()
+                for z in measurements! {
+                    let zFormatter = z.date.utc
+                    let inputFormatter = DateFormatter()
+                    inputFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+                    let showDate = inputFormatter.date(from:zFormatter)
+                    inputFormatter.dateFormat = "yyyy-MM-dd"
+                    let resultStringZ = inputFormatter.string(from: showDate!)
                     
-                    for z in measurements! {
-                        let zFormatter = z.date.utc
-                        let inputFormatter = DateFormatter()
-                        inputFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-                        let showDate = inputFormatter.date(from:zFormatter)
-                        inputFormatter.dateFormat = "yyyy-MM-dd"
-                        let resultStringZ = inputFormatter.string(from: showDate!)
-                        
-                        let dateFormatter = DateFormatter()
-                        dateFormatter.dateFormat = "yyyy-MM-dd"
-                        let newX = Calendar.current.date(byAdding: .day, value: value, to: now)
-                        let newResultString = newX!.toString(dateFormat: "yyyy-MM-dd")
-                        if newResultString == resultStringZ {
-                            measurmentsByDates.append(z)
-                            value -= 1
-                            continue
-                        }
-                        if value <= -7{
-                            break
-                        }
+                    let dateFormatter = DateFormatter()
+                    dateFormatter.dateFormat = "yyyy-MM-dd"
+                    let newX = Calendar.current.date(byAdding: .day, value: value, to: now)
+                    let newResultString = newX!.toString(dateFormat: "yyyy-MM-dd")
+                    if newResultString == resultStringZ {
+                        measurmentsByDates.append(z)
+                        value -= 1
+                        continue
+                    }
+                    if value <= -7{
+                        break
+                    }
 
-                        print(newResultString)
-                        
-                    }
-                    DataBaseManager.shared.saveListMeasurementsLocal(measurements: measurmentsByDates)
-                    let measurementLocal = DataBaseManager.shared.fetchMeasurementsFromCoreData()
-                    print("KACA:\(measurementLocal)")
-                    self.measurements = measurmentsByDates
-                    DispatchQueue.main.async {
-                        self.cityDetailTableView.reloadData()
-                        
-                    }
+                    print(newResultString)
                     
                 }
-                
-            }
-                
-            } else {
-                self.measurements = measurementF
+                DataBaseManager.shared.saveListMeasurementsLocal(measurements: measurmentsByDates)
+                let measurementLocal = DataBaseManager.shared.fetchMeasurementsFromCoreData()
+                print("KACA:\(measurementLocal)")
+                self.measurements = measurmentsByDates
                 DispatchQueue.main.async {
                     self.cityDetailTableView.reloadData()
                     
                 }
                 
             }
+            }
             
-        } else {
-            
-        }
-        
     }
-    
-}
-    
-    
+    }
+        
+
 
 
 extension CityDetailViewController:UITableViewDataSource,UITableViewDelegate {

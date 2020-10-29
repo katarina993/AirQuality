@@ -14,6 +14,7 @@ class MyPlaceViewController: UIViewController {
     var selectedCityName: String?
     var places = [Place]()
     var searchPlaces = [Place]()
+    var cities = [City]()
     
     @IBAction func AddPlaceButton(_ sender: Any) {
         let main = UIStoryboard(name: "Main", bundle: nil)
@@ -21,21 +22,19 @@ class MyPlaceViewController: UIViewController {
         self.navigationController?.pushViewController(cityListVC, animated: true)
         
     }
+    
     @IBOutlet weak var placeSearchBar: UISearchBar!
     @IBOutlet weak var placeTableView: UITableView!
     override func viewDidLoad() {
-        
         super.viewDidLoad()
-        
         placeSearchBar.delegate = self
         navigationItem.hidesBackButton = true
         let placesDB = DataBaseManager.shared.fetchPlacesFromCoreData()
         if selectedCityName != nil  {
             if placesDB.isEmpty {
                 self.fetchMeasurmentPlaceAndReloadData()
-            }
-            else {
-                for placeDB in placesDB{
+            } else {
+                for placeDB in placesDB {
                     if placeDB.city == selectedCityName {
                         self.places = placesDB
                         self.searchPlaces = self.places
@@ -57,13 +56,14 @@ class MyPlaceViewController: UIViewController {
                 self.searchPlaces = self.places
                 DispatchQueue.main.async {
                     self.placeTableView.reloadData()
+                    
+                }
+                
             }
             
-            }
         }
-    
+        
     }
-    
     
     func fetchMeasurmentPlaceAndReloadData(){
         DataController.shared.getMeasurementsFromAPI(city:selectedCityName,parameter:"pm25", sort: "asc") { [self] (measurements) in
@@ -84,13 +84,24 @@ class MyPlaceViewController: UIViewController {
                         }
                     }
                 }
+            } else {
+                DispatchQueue.main.async {
+                    self.places = DataBaseManager.shared.fetchPlacesFromCoreData()
+                    self.searchPlaces = self.places
+                let alertController = UIAlertController(title: "", message: "No measurement data for \(selectedCityName!)", preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                    self.present(alertController, animated: true, completion: nil)
+                    self.placeTableView.reloadData()
+                    
+                }
+                
             }
+            
         }
+        
     }
     
 }
-    
-
 
 extension MyPlaceViewController: UITableViewDelegate,UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -123,24 +134,18 @@ extension MyPlaceViewController: UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedCity =  self.searchPlaces[indexPath.row].city
         let vc = storyboard?.instantiateViewController(identifier: "cityDetail") as! CityDetailViewController
-            vc.cityD = selectedCity
+            vc.cityName = selectedCity
             self.navigationController?.pushViewController(vc, animated: true)
         }
-        
-    
-     
     func fetchCountries(completion: @escaping ([Country]?) -> Void){
         DataController.shared.getCountriesFromAPI{ (countries) in
             completion(countries)
         }
     }
     
-
 }
 
 extension MyPlaceViewController: UISearchBarDelegate {
-    
-    
     func searchBar(_ searchBar: UISearchBar,textDidChange searchText: String) {
         guard !searchText.isEmpty else {
             self.searchPlaces = self.places
