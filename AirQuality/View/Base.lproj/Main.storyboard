@@ -267,18 +267,18 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="RYL-Pd-7DZ">
-                                <rect key="frame" x="0.0" y="144" width="414" height="669"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="769"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CityListIdentifier" id="gxY-VG-UFK" customClass="CityListTableViewCell" customModule="AirQuality" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
+                                        <rect key="frame" x="0.0" y="28" width="414" height="43"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gxY-VG-UFK" id="JX3-cn-p2C">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nMS-r8-5kP">
-                                                    <rect key="frame" x="70" y="11" width="77" height="21.5"/>
+                                                    <rect key="frame" x="40" y="11" width="77" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -286,7 +286,7 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="nMS-r8-5kP" secondAttribute="trailing" id="36k-b6-4a2"/>
-                                                <constraint firstItem="nMS-r8-5kP" firstAttribute="leading" secondItem="JX3-cn-p2C" secondAttribute="leadingMargin" constant="50" id="BS1-qF-5b3"/>
+                                                <constraint firstItem="nMS-r8-5kP" firstAttribute="leading" secondItem="JX3-cn-p2C" secondAttribute="leadingMargin" constant="20" id="BS1-qF-5b3"/>
                                                 <constraint firstItem="nMS-r8-5kP" firstAttribute="top" secondItem="JX3-cn-p2C" secondAttribute="topMargin" id="iZJ-yf-yUN"/>
                                                 <constraint firstItem="nMS-r8-5kP" firstAttribute="bottom" secondItem="JX3-cn-p2C" secondAttribute="bottomMargin" id="nHn-Qn-Y8U"/>
                                             </constraints>
@@ -301,40 +301,26 @@
                                     <outlet property="delegate" destination="u6d-hn-dAY" id="4Gi-8e-OHt"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yfb-vK-h5D">
-                                <rect key="frame" x="30" y="74" width="354" height="40"/>
-                                <color key="backgroundColor" red="0.39924140590000001" green="0.83241200159999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
-                                <state key="normal" title="Choose country"/>
-                                <connections>
-                                    <action selector="chooseCountryButtonTapped:" destination="u6d-hn-dAY" eventType="touchUpInside" id="1hS-5J-Sn5"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="FOw-gO-BZG"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="yfb-vK-h5D" firstAttribute="leading" secondItem="FOw-gO-BZG" secondAttribute="leading" constant="30" id="1kH-U1-kLZ"/>
-                            <constraint firstItem="RYL-Pd-7DZ" firstAttribute="top" secondItem="yfb-vK-h5D" secondAttribute="bottom" constant="30" id="6nH-N6-sLl"/>
-                            <constraint firstItem="yfb-vK-h5D" firstAttribute="top" secondItem="FOw-gO-BZG" secondAttribute="top" constant="30" id="JqB-a7-CGo"/>
-                            <constraint firstItem="FOw-gO-BZG" firstAttribute="trailing" secondItem="yfb-vK-h5D" secondAttribute="trailing" constant="30" id="KQf-wA-JMU"/>
                             <constraint firstItem="RYL-Pd-7DZ" firstAttribute="trailing" secondItem="FOw-gO-BZG" secondAttribute="trailing" id="SYS-hp-InC"/>
-                            <constraint firstItem="RYL-Pd-7DZ" firstAttribute="top" secondItem="FOw-gO-BZG" secondAttribute="top" constant="100" id="Tzp-Og-wAF"/>
+                            <constraint firstItem="RYL-Pd-7DZ" firstAttribute="top" secondItem="FOw-gO-BZG" secondAttribute="top" id="Tzp-Og-wAF"/>
                             <constraint firstItem="RYL-Pd-7DZ" firstAttribute="bottom" secondItem="FOw-gO-BZG" secondAttribute="bottom" id="XTO-oL-6hR"/>
                             <constraint firstItem="RYL-Pd-7DZ" firstAttribute="leading" secondItem="FOw-gO-BZG" secondAttribute="leading" id="iG8-9a-nh9"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="28G-hb-9id"/>
+                    <navigationItem key="navigationItem" title="Country List" id="Qb4-Cy-icP"/>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="chooseCountryButton" destination="yfb-vK-h5D" id="ifv-rU-p3w"/>
                         <outlet property="citiesTableView" destination="RYL-Pd-7DZ" id="jpp-z3-EXb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ufm-4m-bRm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3019" y="96"/>
+            <point key="canvasLocation" x="3018.840579710145" y="95.758928571428569"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Pch-UN-6Ti">

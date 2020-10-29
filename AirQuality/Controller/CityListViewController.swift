@@ -20,19 +20,16 @@ class CityListViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var citiesTableView: UITableView!
     
    
-    @IBAction func chooseCountryButtonTapped(_ sender: Any) {
-        showAlertToUser()
-        
-    }
+  
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.chooseCountryButton.isEnabled = false
+
         DataController.shared.getCountriesFromAPI() { countries in
             if countries != nil {
                 self.countries = countries!
                 DispatchQueue.main.async {
-                    self.chooseCountryButton.isEnabled = true
+                    self.citiesTableView.reloadData()
                 }
                 
             } else {
@@ -48,31 +45,24 @@ class CityListViewController: UIViewController, UITableViewDelegate, UITableView
         return 1
        }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return cities.count
+        return countries.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CityListIdentifier", for: indexPath) as! CityListTableViewCell
-        let city = cities[indexPath.row]
-        cell.cityNameLabel.text = city.name
+        let country = countries[indexPath.row]
+        cell.cityNameLabel.text = country.name
         return cell
        }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let ac = UIAlertController(title: "Do you want to add this city to your favorite list?", message: "", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "Ok", style: .default) { (_) in
-            let selectedCity = self.cities[indexPath.row].name
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "firstVC") as! MyPlaceViewController
-            vc.selectedCityName = selectedCity
-            self.navigationController?.pushViewController(vc, animated: true)
-            
+        let selectedCountry =  self.countries[indexPath.row].code
+        DataController.shared.getCitiesFromAPI(countryCode: selectedCountry) { cities in
+            self.cities = cities!
+            DispatchQueue.main.async {
+                self.showAlertToUser()
+            }
         }
-        ac.addAction(okAction)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
-        ac.addAction(cancelAction)
-        present(ac, animated: true, completion: nil)
     }
-    
 }
 
     //MARK: PICKER VIEW
@@ -81,28 +71,28 @@ extension CityListViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         return 1
     }
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return countries.count
+        return cities.count
     }
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return countries[row].name
+        return cities[row].name
     }
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-
-            let valueSelected = countries[row].name
-            print(valueSelected!)
-        }
        
+    }
+    
     func showAlertToUser() {
         let vc = UIViewController()
         vc.preferredContentSize = CGSize(width: 250,height: 300)
         pickerView.delegate = self
         pickerView.dataSource = self
         vc.view.addSubview(pickerView)
-        let editRadiusAlert = UIAlertController(title: "Choose country", message: "", preferredStyle: UIAlertController.Style.alert)
+        let editRadiusAlert = UIAlertController(title: "Choose city", message: "", preferredStyle: UIAlertController.Style.alert)
             editRadiusAlert.setValue(vc, forKey: "contentViewController")
         let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
-                UIAlertAction in
-            self.showCities()
+            UIAlertAction in
+            let selectedValue = self.cities[self.pickerView.selectedRow(inComponent: 0)].name
+            self.addMyPlace(cityName: selectedValue)
+            
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel) {
             UIAlertAction in
@@ -114,21 +104,11 @@ extension CityListViewController: UIPickerViewDelegate, UIPickerViewDataSource {
         
     }
     
-    func showCities() {
-        let selectedIndex = pickerView.selectedRow(inComponent: 0)
-        let selectedCode = self.countries[selectedIndex].code
-        DataController.shared.getCitiesFromAPI(countryCode: selectedCode) { cities in
-            self.cities = cities!
-            DispatchQueue.main.async {
-            self.citiesTableView.reloadData()
-                
-            }
-            NSLog("OK Pressed")
-            
-        }
-        
+    func addMyPlace(cityName: String) {
+        let vc = storyboard?.instantiateViewController(identifier: "firstVC") as! MyPlaceViewController
+        vc.selectedCityName = cityName
+        self.navigationController?.pushViewController(vc, animated: true)
     }
-    
     
 }
 
