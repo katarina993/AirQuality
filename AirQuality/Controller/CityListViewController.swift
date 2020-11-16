@@ -20,8 +20,6 @@ class CityListViewController: UIViewController, UITableViewDelegate, UITableView
     @IBOutlet weak var citiesTableView: UITableView!
     
    
-  
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
