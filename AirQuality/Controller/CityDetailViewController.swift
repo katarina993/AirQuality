@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import UIKit
+import GoogleMaps
 
 class CityDetailViewController: UIViewController {
     
@@ -19,6 +20,7 @@ class CityDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        cityDetailTableView.bounces = false
         self.title = cityName
         let measurementsDB = DataBaseManager.shared.fetchMeasurementsFromCoreData()
         if cityName != nil {
@@ -28,8 +30,8 @@ class CityDetailViewController: UIViewController {
             } else {
                 for measurementDB in measurementsDB {
                     if measurementDB.city == cityName {
-                        self.measurements = measurementsDB
                         DispatchQueue.main.async {
+                            self.measurements = measurementsDB
                             self.cityDetailTableView.reloadData()
                             
                         }
@@ -42,8 +44,8 @@ class CityDetailViewController: UIViewController {
             }
             
         } else {
-            self.measurements = measurementsDB
             DispatchQueue.main.async {
+                self.measurements = measurementsDB
                 self.cityDetailTableView.reloadData()
                 }
                 
@@ -104,9 +106,8 @@ class CityDetailViewController: UIViewController {
                 }
                 DataBaseManager.shared.saveListMeasurementsLocal(measurements: measurmentsByDates)
                 let measurementLocal = DataBaseManager.shared.fetchMeasurementsFromCoreData()
-                print("KACA:\(measurementLocal)")
-                self.measurements = measurmentsByDates
                 DispatchQueue.main.async {
+                    self.measurements = measurmentsByDates
                     self.cityDetailTableView.reloadData()
                     
                 }
@@ -121,20 +122,46 @@ class CityDetailViewController: UIViewController {
 
 
 extension CityDetailViewController:UITableViewDataSource,UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+    
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return self.measurements.isEmpty ? 0 : 2
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.measurements.isEmpty ? 0 : 1
+    }
+    
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cityDetailCell", for: indexPath) as! CityDetailTableViewCell
        
-        cell.measurements = self.measurements
+        if indexPath.section == 0 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cityDetailCell", for: indexPath) as! CityDetailTableViewCell
+            cell.measurements = self.measurements
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "mapCell") as! MapTableViewCell
+            let lat = measurements[indexPath.row].coordinates.latitude
+            let long = measurements[indexPath.row].coordinates.longitude
+            cell.setupMapView(latitude: lat, longitude: long)
+            return cell
+        }
         
-        return cell
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 240
+        
+        var height:CGFloat = 0
+        for view in self.view.subviews {
+            height = height + view.bounds.size.height
+        }
+        print(height)
+        if indexPath.section == 0 {
+            return height * 1/3
+        } else {
+            return height * 2/3
+        }
+       
     }
     
 }
@@ -163,3 +190,4 @@ func getImageForMeasurements(value: AirQuality ) -> UIImage? {
            return UIImage(named: "Hazardous")
     }
 }
+
