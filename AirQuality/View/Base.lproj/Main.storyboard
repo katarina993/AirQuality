@@ -162,7 +162,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="261"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="kOw-ia-uof">
+                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="kOw-ia-uof">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="261"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="kbu-o6-XO7">
@@ -227,7 +227,7 @@
                                                 <constraint firstItem="kOw-ia-uof" firstAttribute="top" secondItem="Ug2-en-MTS" secondAttribute="top" id="DcG-Cq-hNJ"/>
                                                 <constraint firstAttribute="bottom" secondItem="kOw-ia-uof" secondAttribute="bottom" id="cN0-Ft-O5M"/>
                                                 <constraint firstAttribute="trailing" secondItem="kOw-ia-uof" secondAttribute="trailing" id="fi4-Us-NsB"/>
-                                                <constraint firstItem="kOw-ia-uof" firstAttribute="leading" secondItem="Ug2-en-MTS" secondAttribute="leading" multiplier="1:3" id="hZI-0S-i3k"/>
+                                                <constraint firstItem="kOw-ia-uof" firstAttribute="leading" secondItem="Ug2-en-MTS" secondAttribute="leading" id="hZI-0S-i3k"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
@@ -247,10 +247,14 @@
                                                 </view>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="J9f-6u-xMa" firstAttribute="leading" secondItem="oYQ-xl-chO" secondAttribute="leading" id="0Tf-TB-dMe"/>
+                                                <constraint firstAttribute="trailing" secondItem="J9f-6u-xMa" secondAttribute="trailing" id="Uop-7j-ZrW"/>
+                                                <constraint firstAttribute="bottom" secondItem="J9f-6u-xMa" secondAttribute="bottom" id="bK3-HE-1W6"/>
                                                 <constraint firstItem="J9f-6u-xMa" firstAttribute="top" secondItem="oYQ-xl-chO" secondAttribute="top" id="d0C-Pc-zEy"/>
                                                 <constraint firstAttribute="bottom" secondItem="J9f-6u-xMa" secondAttribute="bottom" id="dgh-PH-6am"/>
                                                 <constraint firstAttribute="trailing" secondItem="J9f-6u-xMa" secondAttribute="trailing" id="ezm-9x-a1v"/>
-                                                <constraint firstItem="J9f-6u-xMa" firstAttribute="leading" secondItem="oYQ-xl-chO" secondAttribute="leading" multiplier="2:3" id="pDQ-4K-isE"/>
+                                                <constraint firstItem="J9f-6u-xMa" firstAttribute="leading" secondItem="oYQ-xl-chO" secondAttribute="leading" id="pDQ-4K-isE"/>
+                                                <constraint firstItem="J9f-6u-xMa" firstAttribute="top" secondItem="oYQ-xl-chO" secondAttribute="top" id="scd-zg-hdZ"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>

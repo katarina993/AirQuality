@@ -20,6 +20,7 @@ class CityDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        cityDetailTableView.bounces = false
         self.title = cityName
         let measurementsDB = DataBaseManager.shared.fetchMeasurementsFromCoreData()
         if cityName != nil {
@@ -122,6 +123,7 @@ class CityDetailViewController: UIViewController {
 
 extension CityDetailViewController:UITableViewDataSource,UITableViewDelegate {
     
+    
     func numberOfSections(in tableView: UITableView) -> Int {
         return self.measurements.isEmpty ? 0 : 2
     }
@@ -129,6 +131,7 @@ extension CityDetailViewController:UITableViewDataSource,UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.measurements.isEmpty ? 0 : 1
     }
+    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
        
@@ -147,7 +150,18 @@ extension CityDetailViewController:UITableViewDataSource,UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 240
+        
+        var height:CGFloat = 0
+        for view in self.view.subviews {
+            height = height + view.bounds.size.height
+        }
+        print(height)
+        if indexPath.section == 0 {
+            return height * 1/3
+        } else {
+            return height * 2/3
+        }
+       
     }
     
 }
@@ -176,3 +190,4 @@ func getImageForMeasurements(value: AirQuality ) -> UIImage? {
            return UIImage(named: "Hazardous")
     }
 }
+
