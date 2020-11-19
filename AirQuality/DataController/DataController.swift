@@ -97,23 +97,3 @@ func executeRequest(endpoint: String,
       dataTask.resume()
     }
   }
-
-func parseJSON(_ cityData: Data) -> [City]? {
-        let decoder = JSONDecoder()
-        do {
-            let decodedData = try decoder.decode([City].self, from: cityData)
-            let name = decodedData[0].name
-            let country = decodedData[0].country
-            let city = try! [City](from: decodedData as! Decoder)
-            return city
-            
-            
-        } catch let error {
-            error.localizedDescription
-            return nil
-        }
-    }
-    
-    
-    
-

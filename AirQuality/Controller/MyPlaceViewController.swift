@@ -12,8 +12,8 @@ import CoreData
 class MyPlaceViewController: UIViewController {
     
     var selectedCityName: String?
-    var places = [Place]()
-    var searchPlaces = [Place]()
+    var allPlaces = [Place]()
+    var placesTableDataSource = [Place]()
     var cities = [City]()
     
     @IBAction func AddPlaceButton(_ sender: Any) {
@@ -36,8 +36,8 @@ class MyPlaceViewController: UIViewController {
             } else {
                 for placeDB in placesDB {
                     if placeDB.city == selectedCityName {
-                        self.places = placesDB
-                        self.searchPlaces = self.places
+                        self.allPlaces = placesDB
+                        self.placesTableDataSource = self.allPlaces
                         DispatchQueue.main.async {
                             self.placeTableView.reloadData()
                             
@@ -52,12 +52,43 @@ class MyPlaceViewController: UIViewController {
             if placesDB.isEmpty {
                 self.placeSearchBar.isHidden = true
             } else {
-                self.places = placesDB
-                self.searchPlaces = self.places
-                DispatchQueue.main.async {
-                    self.placeTableView.reloadData()
-                    
-                }
+                self.allPlaces = placesDB      //?
+                self.placesTableDataSource = self.allPlaces //?
+                
+                let timeToLive: TimeInterval = 60 * 60 * 3
+                    for placeDB in placesDB {
+                        let today = Date()
+                        let df = DateFormatter()
+                        df.dateFormat = "yyyy-MM-dd hh:mm:ss"
+                        let now = df.string(from: today)
+                        let isExpired = today.timeIntervalSince(placeDB.updatedAt)
+                        let updateAt = placeDB.updatedAt
+                        let updateAtString = df.string(from: updateAt)
+                        if isExpired >= timeToLive {
+                            DataController.shared.getMeasurementsFromPeriodFromAPI(city: placeDB.city, parameter: "pm25" , sort: "desc", date_from: updateAtString, date_to: now, order_by: "date"){(measurements) in
+                                if measurements != nil && !measurements!.isEmpty {
+                                    if measurements!.first?.value != placeDB.measurementValue {
+                                        placeDB.measurementValue = measurements!.first!.value
+                                        placeDB.measurementDate.local = measurements!.first!.date.local
+                                    }
+                                    
+                                    DataBaseManager.shared.updatePlaces(currentCityName: placeDB.city, newCityValue: measurements!.first!.value, newUpDateAt: today, newMeasurementDate:measurements!.first!.date)
+                                    
+                                    self.allPlaces = DataBaseManager.shared.fetchPlacesFromCoreData()
+                                    self.placesTableDataSource = self.allPlaces
+                                    DispatchQueue.main.async {
+                                        self.placeTableView.reloadData()
+                            
+                                    }
+                                    
+                                }
+                                
+                            }
+                           
+                            
+                        }
+                        
+                    }
                 
             }
             
@@ -76,9 +107,10 @@ class MyPlaceViewController: UIViewController {
                         let countryName = countries!.filter{$0.code == measurement?.country}.first?.name
                         measurement?.countryName = countryName
                         place.countryName = countryName
+                        
                         DataBaseManager.shared.savePlaces(places: place)
-                        self.places = DataBaseManager.shared.fetchPlacesFromCoreData()
-                        self.searchPlaces = self.places
+                        self.allPlaces = DataBaseManager.shared.fetchPlacesFromCoreData()
+                        self.placesTableDataSource = self.allPlaces
                         DispatchQueue.main.async {
                             self.placeTableView.reloadData()
                         }
@@ -86,10 +118,10 @@ class MyPlaceViewController: UIViewController {
                 }
             } else {
                 DispatchQueue.main.async {
-                    self.places = DataBaseManager.shared.fetchPlacesFromCoreData()
-                    self.searchPlaces = self.places
-                let alertController = UIAlertController(title: "", message: "No measurement data for \(selectedCityName!)", preferredStyle: .alert)
-                alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                    self.allPlaces = DataBaseManager.shared.fetchPlacesFromCoreData()
+                    self.placesTableDataSource = self.allPlaces
+                    let alertController = UIAlertController(title: "", message: "No measurement data for \(selectedCityName!)", preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
                     self.present(alertController, animated: true, completion: nil)
                     self.placeTableView.reloadData()
                     
@@ -108,24 +140,24 @@ extension MyPlaceViewController: UITableViewDelegate,UITableViewDataSource {
         return 1
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchPlaces.count
+        return placesTableDataSource.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CityInformation", for: indexPath) as! MyPlaceTableViewCell
         
-        cell.cityNameLabel.text = searchPlaces[indexPath.row].city
+        cell.cityNameLabel.text = placesTableDataSource[indexPath.row].city
         
-        let y = Double(round(100*searchPlaces[indexPath.row].measurementValue)/100)
+        let y = Double(round(100*placesTableDataSource[indexPath.row].measurementValue)/100)
         cell.airQualityLabel.text = String(y)
-        let measurmentDate = searchPlaces[indexPath.row].measurementDate.local
+        let measurmentDate = placesTableDataSource[indexPath.row].measurementDate.local
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         let date = dateFormatter.date(from:measurmentDate)
         dateFormatter.dateFormat = "yyyy-MM-dd"
         let finalDateStrint = dateFormatter.string(from:date!)
         cell.dateLabel.text = finalDateStrint
-        cell.countryNameLabel.text = searchPlaces[indexPath.row].countryName
+        cell.countryNameLabel.text = placesTableDataSource[indexPath.row].countryName
         return cell
      }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -133,7 +165,7 @@ extension MyPlaceViewController: UITableViewDelegate,UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedCity =  self.searchPlaces[indexPath.row].city
+        let selectedCity =  self.placesTableDataSource[indexPath.row].city
         let vc = storyboard?.instantiateViewController(identifier: "cityDetail") as! CityDetailViewController
             vc.cityName = selectedCity
             self.navigationController?.pushViewController(vc, animated: true)
@@ -141,6 +173,7 @@ extension MyPlaceViewController: UITableViewDelegate,UITableViewDataSource {
     func fetchCountries(completion: @escaping ([Country]?) -> Void){
         DataController.shared.getCountriesFromAPI{ (countries) in
             completion(countries)
+
         }
     }
     
@@ -149,12 +182,12 @@ extension MyPlaceViewController: UITableViewDelegate,UITableViewDataSource {
 extension MyPlaceViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar,textDidChange searchText: String) {
         guard !searchText.isEmpty else {
-            self.searchPlaces = self.places
+            self.placesTableDataSource = self.allPlaces
             placeTableView.reloadData()
             return
             
         }
-        self.searchPlaces = self.places.filter({ (place) -> Bool in
+        self.placesTableDataSource = self.allPlaces.filter({ (place) -> Bool in
             return place.city.lowercased().contains(searchText.lowercased())
         })
         placeTableView.reloadData()

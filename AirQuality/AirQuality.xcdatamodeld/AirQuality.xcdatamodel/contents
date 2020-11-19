@@ -24,7 +24,11 @@
     </entity>
     <entity name="PlacesLocal" representedClassName="PlacesLocal" syncable="YES" codeGenerationType="class">
         <attribute name="city" optional="YES" attributeType="String"/>
-        <attribute name="countryName" optional="YES" attributeType="String"/>
+        <attribute name="countryName" optional="YES" attributeType="String">
+            <userInfo>
+                <entry key="key" value="value"/>
+            </userInfo>
+        </attribute>
         <attribute name="measurementValue" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="updatedAt" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="measurementDate" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="DateLocal" inverseName="place" inverseEntity="DateLocal"/>

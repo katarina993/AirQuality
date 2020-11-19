@@ -80,7 +80,7 @@ class DataBaseManager: NSObject {
         }
        
         }
-    
+   
     
     func convertMesurmentsLocalToMeasurements(measurementLocal: MeasurementsLocal) -> Measurements{
        
@@ -176,6 +176,34 @@ class DataBaseManager: NSObject {
         }
         return placesArray
     }
+    
+   
+    func updatePlaces(currentCityName:String, newCityValue:Double, newUpDateAt:Date, newMeasurementDate:MeasurementsDate) {
+        let managedContext = getContext()!
+        let placeFetchRequest = NSFetchRequest<PlacesLocal>(entityName: "PlacesLocal")
+        placeFetchRequest.predicate = NSPredicate(format:"city =%@", currentCityName)
+        
+        do {
+            let dateLocal = DateLocal(context: managedContext)
+            dateLocal.local = newMeasurementDate.local
+            dateLocal.utc = newMeasurementDate.utc
+            
+            let fetchReturn = try managedContext.fetch(placeFetchRequest)
+            let objectUpdate = fetchReturn[0] as NSManagedObject
+            objectUpdate.setValue(newCityValue, forKey: "measurementValue")
+            objectUpdate.setValue(newUpDateAt, forKey: "updatedAt")
+            objectUpdate.setValue(dateLocal, forKey: "measurementDate")
+            do {
+                try managedContext.save()
+                print("updated successfully")
+            } catch let error as NSError {
+                print("Could not save. \(error), \(error.userInfo)")
+            }
+        } catch let error as NSError {
+            print("Could not save.\(error), \(error.userInfo)")
+        }
+    }
+    
     
 }
 
