@@ -19,7 +19,7 @@ extension DataController {
         executeRequest(endpoint: endpoint, method: .get, queryParams: queryParams) { (data, statusCode, error) in
               if statusCode == .ok && data != nil {
 
-                  let citiesResponse = try! JSONDecoder().decode(CitiesResponse.self, from:data!)
+                let citiesResponse = try! JSONDecoder().decode(CitiesResponse.self, from:data!)
                 let result = citiesResponse.results
                   completion(result)
                   

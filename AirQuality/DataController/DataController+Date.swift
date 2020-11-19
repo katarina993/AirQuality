@@ -9,7 +9,7 @@
 import Foundation
 
 extension DataController {
-func getMeasurementsFromPeriodFromAPI(city: String?, parameter:String?, sort: String?, date_from:String?, date_to: String? , completion: @escaping ([Measurements]?) -> Void) {
+    func getMeasurementsFromPeriodFromAPI(city: String?, parameter:String?, sort: String?, date_from:String?, date_to: String? , order_by:String?, completion: @escaping ([Measurements]?) -> Void) {
         let endpoint = "/measurements"
         var queryParams = [String:String]()
     if city != nil {
@@ -26,6 +26,9 @@ func getMeasurementsFromPeriodFromAPI(city: String?, parameter:String?, sort: St
     }
     if date_to != nil {
         queryParams["date_to"] = date_to
+    }
+    if order_by != nil {
+        queryParams["order_by"] = order_by
     }
     executeRequest(endpoint: endpoint, method: .get, queryParams: queryParams) { (data, statusCode, error) in
         if statusCode == .ok && data != nil {

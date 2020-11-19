@@ -10,7 +10,7 @@ import UIKit
 
 class CityListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
   
-    @IBOutlet weak var chooseCountryButton: UIButton!
+    
     var cities = [City]()
     var countries = [Country]()
     let pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: 250, height: 300))
@@ -19,7 +19,6 @@ class CityListViewController: UIViewController, UITableViewDelegate, UITableView
     
     @IBOutlet weak var citiesTableView: UITableView!
     
-   
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -74,9 +73,7 @@ extension CityListViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return cities[row].name
     }
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-       
-    }
+    
     
     func showAlertToUser() {
         let vc = UIViewController()

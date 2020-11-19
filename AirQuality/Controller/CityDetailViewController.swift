@@ -62,7 +62,7 @@ class CityDetailViewController: UIViewController {
         formatter.dateFormat = "yyyy-MM-dd"
         let dateFromString = formatter.string(from: newDate!)
         print(dateFromString)
-        DataController.shared.getMeasurementsFromPeriodFromAPI(city:cityName ,parameter:"pm25", sort: "asc", date_from: dateFromString, date_to:dateToString){(measurements) in
+        DataController.shared.getMeasurementsFromPeriodFromAPI(city:cityName ,parameter:"pm25", sort: "asc", date_from: dateFromString, date_to:dateToString, order_by: nil){(measurements) in
             if measurements != nil{
                 var measurmentsByDates = [Measurements]()
                 for y in measurements! {
@@ -97,7 +97,7 @@ class CityDetailViewController: UIViewController {
                         value -= 1
                         continue
                     }
-                    if value <= -7{
+                    if value <= -7 {
                         break
                     }
 
