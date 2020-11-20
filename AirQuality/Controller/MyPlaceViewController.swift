@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import SwiftUI
 
 class MyPlaceViewController: UIViewController {
     
@@ -16,10 +17,15 @@ class MyPlaceViewController: UIViewController {
     var placesTableDataSource = [Place]()
     var cities = [City]()
     
+    @IBOutlet weak var spinner: UIActivityIndicatorView!
+    
+    
+    
     @IBAction func AddPlaceButton(_ sender: Any) {
         let main = UIStoryboard(name: "Main", bundle: nil)
         let cityListVC = main.instantiateViewController(withIdentifier: "secondVC")
         self.navigationController?.pushViewController(cityListVC, animated: true)
+        
         
     }
     
@@ -31,17 +37,21 @@ class MyPlaceViewController: UIViewController {
         navigationItem.hidesBackButton = true
         let placesDB = DataBaseManager.shared.fetchPlacesFromCoreData()
         if selectedCityName != nil  {
-            if placesDB.isEmpty {
+        spinner.startAnimating()
+        if placesDB.isEmpty {
                 self.fetchMeasurmentPlaceAndReloadData()
+               
             } else {
                 for placeDB in placesDB {
                     if placeDB.city == selectedCityName {
                         self.allPlaces = placesDB
                         self.placesTableDataSource = self.allPlaces
+                        spinner.startAnimating()
                         DispatchQueue.main.async {
                             self.placeTableView.reloadData()
-                            
+                            self.spinner.stopAnimating()
                         }
+                        
                         return
                     }
                 }
@@ -54,6 +64,8 @@ class MyPlaceViewController: UIViewController {
             } else {
                 self.allPlaces = placesDB      //?
                 self.placesTableDataSource = self.allPlaces //?
+                
+               self.spinner.hidesWhenStopped = true
                 
                 let timeToLive: TimeInterval = 60 * 60 * 3
                     for placeDB in placesDB {
@@ -78,6 +90,9 @@ class MyPlaceViewController: UIViewController {
                                     self.placesTableDataSource = self.allPlaces
                                     DispatchQueue.main.async {
                                         self.placeTableView.reloadData()
+                                       
+                                        self.spinner.stopAnimating()
+                                        self.spinner.hidesWhenStopped = true
                             
                                     }
                                     
@@ -111,19 +126,26 @@ class MyPlaceViewController: UIViewController {
                         DataBaseManager.shared.savePlaces(places: place)
                         self.allPlaces = DataBaseManager.shared.fetchPlacesFromCoreData()
                         self.placesTableDataSource = self.allPlaces
+                        
                         DispatchQueue.main.async {
+                            self.spinner.startAnimating()
                             self.placeTableView.reloadData()
+                            self.spinner.stopAnimating()
+                            self.spinner.hidesWhenStopped = true
                         }
                     }
                 }
             } else {
                 DispatchQueue.main.async {
+                    spinner.startAnimating()
                     self.allPlaces = DataBaseManager.shared.fetchPlacesFromCoreData()
                     self.placesTableDataSource = self.allPlaces
                     let alertController = UIAlertController(title: "", message: "No measurement data for \(selectedCityName!)", preferredStyle: .alert)
                     alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
                     self.present(alertController, animated: true, completion: nil)
                     self.placeTableView.reloadData()
+                    self.spinner.stopAnimating()
+                    self.spinner.hidesWhenStopped = true
                     
                 }
                 
@@ -134,6 +156,8 @@ class MyPlaceViewController: UIViewController {
     }
     
 }
+
+
 
 extension MyPlaceViewController: UITableViewDelegate,UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -195,5 +219,5 @@ extension MyPlaceViewController: UISearchBarDelegate {
     
 }
 
-    
+
 

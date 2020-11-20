@@ -16,6 +16,9 @@ class CityListViewController: UIViewController, UITableViewDelegate, UITableView
     let pickerView = UIPickerView(frame: CGRect(x: 0, y: 0, width: 250, height: 300))
     var date = [MeasurementsDate]()
     
+    @IBOutlet weak var spinner2: UIActivityIndicatorView!
+    
+    
     
     @IBOutlet weak var citiesTableView: UITableView!
     
@@ -24,9 +27,15 @@ class CityListViewController: UIViewController, UITableViewDelegate, UITableView
 
         DataController.shared.getCountriesFromAPI() { countries in
             if countries != nil {
+                DispatchQueue.main.async {
+                    self.spinner2.startAnimating()
+                }
+               
                 self.countries = countries!
                 DispatchQueue.main.async {
                     self.citiesTableView.reloadData()
+                    self.spinner2.hidesWhenStopped = true
+                    self.spinner2.stopAnimating()
                 }
                 
             } else {

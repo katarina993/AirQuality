@@ -104,6 +104,13 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="tAj-GX-4Bq"/>
                                 </connections>
                             </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="bJr-dQ-CCq">
+                                <rect key="frame" x="182" y="423" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="cdt-Oo-yud"/>
+                                    <constraint firstAttribute="width" constant="50" id="m7z-mQ-mI8"/>
+                                </constraints>
+                            </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gPK-fo-KFi">
                                 <rect key="frame" x="40" y="848" width="334" height="30"/>
                                 <color key="backgroundColor" red="0.39924140590000001" green="0.83241200159999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -123,9 +130,11 @@
                             <constraint firstItem="F0G-aE-AV7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="2Go-vI-9zQ"/>
                             <constraint firstAttribute="bottom" secondItem="F0G-aE-AV7" secondAttribute="bottom" constant="50" id="4wd-Td-6o8"/>
                             <constraint firstItem="0JH-KU-C4n" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="DLq-dn-h3W"/>
+                            <constraint firstItem="bJr-dQ-CCq" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="NN6-YV-lCW"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="gPK-fo-KFi" secondAttribute="trailing" constant="40" id="NaE-WA-FK0"/>
                             <constraint firstItem="F0G-aE-AV7" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="VeJ-GI-Vn3"/>
                             <constraint firstItem="0JH-KU-C4n" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ZJd-B5-Zm0"/>
+                            <constraint firstItem="bJr-dQ-CCq" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="bhz-vr-wcG"/>
                             <constraint firstItem="gPK-fo-KFi" firstAttribute="top" secondItem="F0G-aE-AV7" secondAttribute="bottom" constant="2" id="gir-Yz-zVg"/>
                             <constraint firstItem="F0G-aE-AV7" firstAttribute="top" secondItem="0JH-KU-C4n" secondAttribute="bottom" id="i6Y-0Q-GMG"/>
                             <constraint firstItem="0JH-KU-C4n" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="qoK-oT-6pv"/>
@@ -137,6 +146,7 @@
                     <connections>
                         <outlet property="placeSearchBar" destination="0JH-KU-C4n" id="AL8-KL-CWH"/>
                         <outlet property="placeTableView" destination="F0G-aE-AV7" id="btF-D7-o5Y"/>
+                        <outlet property="spinner" destination="bJr-dQ-CCq" id="QFJ-8w-B6H"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -298,14 +308,14 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CityListIdentifier" id="gxY-VG-UFK" customClass="CityListTableViewCell" customModule="AirQuality" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="43"/>
+                                        <rect key="frame" x="0.0" y="28" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gxY-VG-UFK" id="JX3-cn-p2C">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="City name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nMS-r8-5kP">
-                                                    <rect key="frame" x="40" y="11" width="77" height="21"/>
+                                                    <rect key="frame" x="40" y="11" width="77" height="21.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -328,13 +338,22 @@
                                     <outlet property="delegate" destination="u6d-hn-dAY" id="4Gi-8e-OHt"/>
                                 </connections>
                             </tableView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="F2s-x5-6nT">
+                                <rect key="frame" x="182" y="423" width="50" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="cve-Wk-fff"/>
+                                    <constraint firstAttribute="width" constant="50" id="rvJ-sa-46o"/>
+                                </constraints>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="FOw-gO-BZG"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="F2s-x5-6nT" firstAttribute="centerY" secondItem="nWf-El-TcW" secondAttribute="centerY" id="BHf-K4-Kl5"/>
                             <constraint firstItem="RYL-Pd-7DZ" firstAttribute="trailing" secondItem="FOw-gO-BZG" secondAttribute="trailing" id="SYS-hp-InC"/>
                             <constraint firstItem="RYL-Pd-7DZ" firstAttribute="top" secondItem="FOw-gO-BZG" secondAttribute="top" id="Tzp-Og-wAF"/>
                             <constraint firstItem="RYL-Pd-7DZ" firstAttribute="bottom" secondItem="FOw-gO-BZG" secondAttribute="bottom" id="XTO-oL-6hR"/>
+                            <constraint firstItem="F2s-x5-6nT" firstAttribute="centerX" secondItem="nWf-El-TcW" secondAttribute="centerX" id="YOn-Oj-4AK"/>
                             <constraint firstItem="RYL-Pd-7DZ" firstAttribute="leading" secondItem="FOw-gO-BZG" secondAttribute="leading" id="iG8-9a-nh9"/>
                         </constraints>
                     </view>
@@ -343,6 +362,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="citiesTableView" destination="RYL-Pd-7DZ" id="jpp-z3-EXb"/>
+                        <outlet property="spinner2" destination="F2s-x5-6nT" id="Hrn-3Q-XRR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ufm-4m-bRm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

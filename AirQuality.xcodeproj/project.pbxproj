@@ -37,6 +37,7 @@
 		6E62B35B250F955C005CA299 /* CityDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E62B35A250F955C005CA299 /* CityDetailCollectionViewCell.swift */; };
 		6E6CAF5A2548463100EB06CA /* MapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6CAF592548463100EB06CA /* MapTableViewCell.swift */; };
 		6E7B529E251E23CC00352F01 /* AirQuality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7B529D251E23CC00352F01 /* AirQuality.swift */; };
+		6EACE7A22566D9D4005DE663 /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EACE7A12566D9D4005DE663 /* SpinnerViewController.swift */; };
 		6EBC9A91252E0F0C0050613F /* DataBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC9A90252E0F0C0050613F /* DataBaseManager.swift */; };
 		6EF16240253DE3A100657C59 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF1623F253DE3A100657C59 /* Place.swift */; };
 /* End PBXBuildFile section */
@@ -75,6 +76,7 @@
 		6E62B35A250F955C005CA299 /* CityDetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityDetailCollectionViewCell.swift; sourceTree = "<group>"; };
 		6E6CAF592548463100EB06CA /* MapTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTableViewCell.swift; sourceTree = "<group>"; };
 		6E7B529D251E23CC00352F01 /* AirQuality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirQuality.swift; sourceTree = "<group>"; };
+		6EACE7A12566D9D4005DE663 /* SpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerViewController.swift; sourceTree = "<group>"; };
 		6EBC9A90252E0F0C0050613F /* DataBaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManager.swift; sourceTree = "<group>"; };
 		6EF1623F253DE3A100657C59 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		A21C2AFC26A7DDC42CEAB919 /* Pods-AirQuality.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AirQuality.release.xcconfig"; path = "Target Support Files/Pods-AirQuality/Pods-AirQuality.release.xcconfig"; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 				6E2FFCFA24E5888500A0E286 /* MeasurementsResponse.swift */,
 				6E7B529D251E23CC00352F01 /* AirQuality.swift */,
 				6EBC9A90252E0F0C0050613F /* DataBaseManager.swift */,
+				6EACE7A12566D9D4005DE663 /* SpinnerViewController.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -335,6 +338,7 @@
 				6E2FFCB524D3FE6A00A0E286 /* AppDelegate.swift in Sources */,
 				6E2FFCE124DC560200A0E286 /* DataController+City.swift in Sources */,
 				6E2FFCF124DDCBCF00A0E286 /* Country.swift in Sources */,
+				6EACE7A22566D9D4005DE663 /* SpinnerViewController.swift in Sources */,
 				6E2FFCD324D40A4700A0E286 /* MyPlaceViewController.swift in Sources */,
 				6E2FFCFB24E5888500A0E286 /* MeasurementsResponse.swift in Sources */,
 				6E2FFD0A2502E74300A0E286 /* CityDetailViewController.swift in Sources */,
