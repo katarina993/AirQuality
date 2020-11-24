@@ -27,7 +27,7 @@
                                 </connections>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="F0G-aE-AV7">
-                                <rect key="frame" x="0.0" y="164" width="414" height="682"/>
+                                <rect key="frame" x="0.0" y="164" width="414" height="599"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CityInformation" rowHeight="182" id="JfJ-7F-VOf" customClass="MyPlaceTableViewCell" customModule="AirQuality" customModuleProvider="target">
@@ -112,8 +112,12 @@
                                 </constraints>
                             </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gPK-fo-KFi">
-                                <rect key="frame" x="40" y="848" width="334" height="30"/>
+                                <rect key="frame" x="40" y="765" width="334" height="40"/>
                                 <color key="backgroundColor" red="0.39924140590000001" green="0.83241200159999995" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="334" id="2JI-kF-Rwa"/>
+                                    <constraint firstAttribute="height" constant="40" id="9aq-0v-n97"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <state key="normal" title="ADD PLACE">
@@ -128,20 +132,22 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="F0G-aE-AV7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="2Go-vI-9zQ"/>
-                            <constraint firstAttribute="bottom" secondItem="F0G-aE-AV7" secondAttribute="bottom" constant="50" id="4wd-Td-6o8"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="F0G-aE-AV7" secondAttribute="trailing" id="7W5-Za-Y0v"/>
+                            <constraint firstItem="gPK-fo-KFi" firstAttribute="top" secondItem="F0G-aE-AV7" secondAttribute="bottom" constant="2" id="9CH-fF-s90"/>
+                            <constraint firstItem="gPK-fo-KFi" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="CWw-4z-8AE"/>
                             <constraint firstItem="0JH-KU-C4n" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="DLq-dn-h3W"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="gPK-fo-KFi" secondAttribute="trailing" constant="40" id="HQI-LK-u0Z"/>
                             <constraint firstItem="bJr-dQ-CCq" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="NN6-YV-lCW"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="gPK-fo-KFi" secondAttribute="trailing" constant="40" id="NaE-WA-FK0"/>
-                            <constraint firstItem="F0G-aE-AV7" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="VeJ-GI-Vn3"/>
                             <constraint firstItem="0JH-KU-C4n" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ZJd-B5-Zm0"/>
                             <constraint firstItem="bJr-dQ-CCq" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="bhz-vr-wcG"/>
-                            <constraint firstItem="gPK-fo-KFi" firstAttribute="top" secondItem="F0G-aE-AV7" secondAttribute="bottom" constant="2" id="gir-Yz-zVg"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="gPK-fo-KFi" secondAttribute="bottom" constant="8" id="ckK-xg-byT"/>
                             <constraint firstItem="F0G-aE-AV7" firstAttribute="top" secondItem="0JH-KU-C4n" secondAttribute="bottom" id="i6Y-0Q-GMG"/>
                             <constraint firstItem="0JH-KU-C4n" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="qoK-oT-6pv"/>
                             <constraint firstItem="gPK-fo-KFi" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="vk6-Up-3kH"/>
-                            <constraint firstAttribute="bottom" secondItem="gPK-fo-KFi" secondAttribute="bottom" constant="18" id="wpQ-wF-6zK"/>
                         </constraints>
                     </view>
+                    <tabBarItem key="tabBarItem" title="List of my places" image="list.bullet" catalog="system" id="4cw-bJ-Bp2"/>
                     <navigationItem key="navigationItem" title="MY PLACE" id="CEt-tO-6cb"/>
                     <connections>
                         <outlet property="placeSearchBar" destination="0JH-KU-C4n" id="AL8-KL-CWH"/>
@@ -151,7 +157,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1047.8260869565217" y="95.758928571428569"/>
+            <point key="canvasLocation" x="2015.9420289855075" y="-144.64285714285714"/>
         </scene>
         <!--City Detail View Controller-->
         <scene sceneID="hUG-cp-KqE">
@@ -293,7 +299,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y2Y-TD-R3a" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2005.7971014492755" y="89.732142857142847"/>
+            <point key="canvasLocation" x="2915.9420289855075" y="89.732142857142847"/>
         </scene>
         <!--City List-->
         <scene sceneID="vGZ-us-cDB">
@@ -367,7 +373,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ufm-4m-bRm" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3018.840579710145" y="95.758928571428569"/>
+            <point key="canvasLocation" x="3928.985507246377" y="95.758928571428569"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Pch-UN-6Ti">
@@ -380,15 +386,68 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="g7p-yZ-hM4"/>
+                        <segue destination="XLo-Sj-aSz" kind="relationship" relationship="rootViewController" id="g7p-yZ-hM4"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9AO-if-QEs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="137.68115942028987" y="95.758928571428569"/>
         </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="3I4-Tp-cfd">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="XLo-Sj-aSz" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="1Jo-Kg-gXE"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="kO6-om-OPT">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="Tps-e7-7rd"/>
+                        <segue destination="34u-Rk-BaS" kind="relationship" relationship="viewControllers" id="oGK-Hy-f2I"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XAk-XM-lCa" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1047.8260869565217" y="95.758928571428569"/>
+        </scene>
+        <!--Map for places-->
+        <scene sceneID="9Qn-fU-4o2">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PLG-S7-C1Q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <viewController id="34u-Rk-BaS" customClass="MyPlacesMapViewController" customModule="AirQuality" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="rms-Qt-ixl">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nMB-gL-3kB" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="88" width="414" height="725"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="UDh-kx-pxj"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="UDh-kx-pxj" firstAttribute="trailing" secondItem="nMB-gL-3kB" secondAttribute="trailing" id="7rv-3p-PxT"/>
+                            <constraint firstItem="nMB-gL-3kB" firstAttribute="leading" secondItem="UDh-kx-pxj" secondAttribute="leading" id="WF8-3J-Sh1"/>
+                            <constraint firstItem="nMB-gL-3kB" firstAttribute="top" secondItem="UDh-kx-pxj" secondAttribute="top" id="Zor-Ky-w7G"/>
+                            <constraint firstItem="UDh-kx-pxj" firstAttribute="bottom" secondItem="nMB-gL-3kB" secondAttribute="bottom" id="c6f-mZ-56R"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Map for places" image="mappin.and.ellipse" catalog="system" id="Lcs-b4-wdS"/>
+                    <connections>
+                        <outlet property="mapView" destination="nMB-gL-3kB" id="Gb7-Qr-n77"/>
+                    </connections>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="2015.9420289855075" y="582.58928571428567"/>
+        </scene>
     </scenes>
     <resources>
+        <image name="list.bullet" catalog="system" width="128" height="88"/>
+        <image name="mappin.and.ellipse" catalog="system" width="118" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

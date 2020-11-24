@@ -41,8 +41,8 @@ class DataBaseManager: NSObject {
         measurmentsLocal.date = dateLocal
 
         let coordinateLocal = CoordinatesLocal(context: managedContext)
-        coordinateLocal.latitude = measurements.coordinates.latitude
-        coordinateLocal.longitude = measurements.coordinates.longitude
+        coordinateLocal.latitude = measurements.coordinates.latitude ?? 0
+        coordinateLocal.longitude = measurements.coordinates.longitude ?? 0
         measurmentsLocal.coordinate = coordinateLocal
         
         do {
@@ -123,6 +123,11 @@ class DataBaseManager: NSObject {
         dateLocal.local = places.measurementDate.local
         dateLocal.utc = places.measurementDate.utc
         placesLocal.measurementDate = dateLocal
+        
+        let coordinatesLocal = CoordinatesLocal(context: managedContext)
+        coordinatesLocal.latitude = places.measurementCoordinate.latitude ?? 0
+        coordinatesLocal.longitude = places.measurementCoordinate.longitude ?? 0
+        placesLocal.coordinates = coordinatesLocal
         do {
             try managedContext.save()
             
@@ -163,7 +168,8 @@ class DataBaseManager: NSObject {
     
     func convertPlacesLocalToPlaces(placeLocal: PlacesLocal) -> Place {
         let date = MeasurementsDate(utc: (placeLocal.measurementDate?.utc)!, local: (placeLocal.measurementDate?.local)!)
-        let place = Place(city: placeLocal.city!, measurementDate: date, measurementValue: placeLocal.measurementValue, updatedAt: placeLocal.updatedAt!)
+        let coordinate = Coordinates(latitude: placeLocal.coordinates?.latitude, longitude: placeLocal.coordinates?.longitude)
+        let place = Place(city: placeLocal.city!, measurementDate: date, measurementValue: placeLocal.measurementValue, measurementCoordinate: coordinate,  updatedAt: placeLocal.updatedAt!)
         return place
         
     }

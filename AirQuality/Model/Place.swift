@@ -13,12 +13,14 @@ class Place {
     var measurementDate: MeasurementsDate
     var countryName: String?
     var measurementValue: Double
+    var measurementCoordinate: Coordinates
     var updatedAt: Date
     
-    init(city:String, measurementDate: MeasurementsDate, measurementValue: Double, updatedAt: Date) {
+    init(city:String, measurementDate: MeasurementsDate, measurementValue: Double, measurementCoordinate:Coordinates, updatedAt: Date) {
         self.city = city
         self.measurementDate = measurementDate
         self.measurementValue = measurementValue
+        self.measurementCoordinate = measurementCoordinate
         self.updatedAt = updatedAt
     }
     

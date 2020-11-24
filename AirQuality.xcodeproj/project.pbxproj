@@ -38,12 +38,12 @@
 		6E6CAF5A2548463100EB06CA /* MapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E6CAF592548463100EB06CA /* MapTableViewCell.swift */; };
 		6E7B529E251E23CC00352F01 /* AirQuality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7B529D251E23CC00352F01 /* AirQuality.swift */; };
 		6EACE7A22566D9D4005DE663 /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EACE7A12566D9D4005DE663 /* SpinnerViewController.swift */; };
+		6EACE7A7256BDC8C005DE663 /* MyPlacesMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EACE7A6256BDC8C005DE663 /* MyPlacesMapViewController.swift */; };
 		6EBC9A91252E0F0C0050613F /* DataBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC9A90252E0F0C0050613F /* DataBaseManager.swift */; };
 		6EF16240253DE3A100657C59 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF1623F253DE3A100657C59 /* Place.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		46D64D0E910CF54B3F5DB570 /* Pods-AirQuality.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AirQuality.debug.xcconfig"; path = "Target Support Files/Pods-AirQuality/Pods-AirQuality.debug.xcconfig"; sourceTree = "<group>"; };
 		6E2FFCB124D3FE6900A0E286 /* AirQuality.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AirQuality.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6E2FFCB424D3FE6900A0E286 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6E2FFCBB24D3FE6A00A0E286 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -77,9 +77,11 @@
 		6E6CAF592548463100EB06CA /* MapTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapTableViewCell.swift; sourceTree = "<group>"; };
 		6E7B529D251E23CC00352F01 /* AirQuality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirQuality.swift; sourceTree = "<group>"; };
 		6EACE7A12566D9D4005DE663 /* SpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerViewController.swift; sourceTree = "<group>"; };
+		6EACE7A6256BDC8C005DE663 /* MyPlacesMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPlacesMapViewController.swift; sourceTree = "<group>"; };
 		6EBC9A90252E0F0C0050613F /* DataBaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManager.swift; sourceTree = "<group>"; };
 		6EF1623F253DE3A100657C59 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
-		A21C2AFC26A7DDC42CEAB919 /* Pods-AirQuality.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AirQuality.release.xcconfig"; path = "Target Support Files/Pods-AirQuality/Pods-AirQuality.release.xcconfig"; sourceTree = "<group>"; };
+		A19455110EB8E64DA1036334 /* Pods-AirQuality.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AirQuality.release.xcconfig"; path = "Target Support Files/Pods-AirQuality/Pods-AirQuality.release.xcconfig"; sourceTree = "<group>"; };
+		C8644E55E09E2D71E87E0915 /* Pods-AirQuality.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AirQuality.debug.xcconfig"; path = "Target Support Files/Pods-AirQuality/Pods-AirQuality.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,13 +95,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		44C41F03F19825BDCA45F470 /* Pods */ = {
+		15032BBC7940FD404512B040 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				46D64D0E910CF54B3F5DB570 /* Pods-AirQuality.debug.xcconfig */,
-				A21C2AFC26A7DDC42CEAB919 /* Pods-AirQuality.release.xcconfig */,
+				C8644E55E09E2D71E87E0915 /* Pods-AirQuality.debug.xcconfig */,
+				A19455110EB8E64DA1036334 /* Pods-AirQuality.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		6A26F35D0F728CA58247F0AA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		6E2FFCA824D3FE6900A0E286 = {
@@ -107,7 +116,8 @@
 			children = (
 				6E2FFCB324D3FE6900A0E286 /* AirQuality */,
 				6E2FFCB224D3FE6900A0E286 /* Products */,
-				44C41F03F19825BDCA45F470 /* Pods */,
+				15032BBC7940FD404512B040 /* Pods */,
+				6A26F35D0F728CA58247F0AA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -173,6 +183,7 @@
 				6E2FFCD224D40A4700A0E286 /* MyPlaceViewController.swift */,
 				6E2FFCE624DCB26100A0E286 /* CityListViewController.swift */,
 				6E2FFD092502E74300A0E286 /* CityDetailViewController.swift */,
+				6EACE7A6256BDC8C005DE663 /* MyPlacesMapViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -325,6 +336,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6EBC9A91252E0F0C0050613F /* DataBaseManager.swift in Sources */,
+				6EACE7A7256BDC8C005DE663 /* MyPlacesMapViewController.swift in Sources */,
 				6E2FFCD824DB221D00A0E286 /* City.swift in Sources */,
 				6E2FFCEF24DDCB7F00A0E286 /* CountriesResponse.swift in Sources */,
 				6E2FFCED24DDCAAC00A0E286 /* DataController+Country.swift in Sources */,
@@ -494,7 +506,7 @@
 		};
 		6E2FFCC924D3FE7000A0E286 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 46D64D0E910CF54B3F5DB570 /* Pods-AirQuality.debug.xcconfig */;
+			baseConfigurationReference = C8644E55E09E2D71E87E0915 /* Pods-AirQuality.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -512,7 +524,7 @@
 		};
 		6E2FFCCA24D3FE7000A0E286 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A21C2AFC26A7DDC42CEAB919 /* Pods-AirQuality.release.xcconfig */;
+			baseConfigurationReference = A19455110EB8E64DA1036334 /* Pods-AirQuality.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

@@ -36,11 +36,11 @@ class MyPlaceViewController: UIViewController {
         placeSearchBar.delegate = self
         navigationItem.hidesBackButton = true
         let placesDB = DataBaseManager.shared.fetchPlacesFromCoreData()
-        if selectedCityName != nil  {
-        spinner.startAnimating()
-        if placesDB.isEmpty {
+        if selectedCityName != nil {
+            spinner.startAnimating()
+            if placesDB.isEmpty {
                 self.fetchMeasurmentPlaceAndReloadData()
-               
+                
             } else {
                 for placeDB in placesDB {
                     if placeDB.city == selectedCityName {
@@ -53,11 +53,14 @@ class MyPlaceViewController: UIViewController {
                         }
                         
                         return
+                        
                     }
+                    
                 }
                 fetchMeasurmentPlaceAndReloadData()
                 
             }
+                
         } else {
             if placesDB.isEmpty {
                 self.placeSearchBar.isHidden = true
@@ -116,7 +119,7 @@ class MyPlaceViewController: UIViewController {
             if measurements != nil && !measurements!.isEmpty{
                 let dateCurrent = Date()
                 let measurement = measurements?.first
-                let place = Place(city:measurement!.city, measurementDate: measurement!.date, measurementValue: measurement!.value, updatedAt: dateCurrent )
+                let place = Place(city:measurement!.city, measurementDate: measurement!.date, measurementValue: measurement!.value, measurementCoordinate: measurement!.coordinates, updatedAt: dateCurrent )
                 self.fetchCountries { countries in
                     if countries != nil {
                         let countryName = countries!.filter{$0.code == measurement?.country}.first?.name
