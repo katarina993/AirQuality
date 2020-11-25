@@ -17,6 +17,8 @@ class MyPlaceViewController: UIViewController {
     var placesTableDataSource = [Place]()
     var cities = [City]()
     
+    
+    
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     
     
@@ -33,8 +35,10 @@ class MyPlaceViewController: UIViewController {
     @IBOutlet weak var placeTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
+      
         placeSearchBar.delegate = self
         navigationItem.hidesBackButton = true
+  
         let placesDB = DataBaseManager.shared.fetchPlacesFromCoreData()
         if selectedCityName != nil {
             spinner.startAnimating()
@@ -46,10 +50,11 @@ class MyPlaceViewController: UIViewController {
                     if placeDB.city == selectedCityName {
                         self.allPlaces = placesDB
                         self.placesTableDataSource = self.allPlaces
-                        spinner.startAnimating()
+                        
                         DispatchQueue.main.async {
                             self.placeTableView.reloadData()
                             self.spinner.stopAnimating()
+                            self.spinner.hidesWhenStopped = true
                         }
                         
                         return
@@ -65,10 +70,10 @@ class MyPlaceViewController: UIViewController {
             if placesDB.isEmpty {
                 self.placeSearchBar.isHidden = true
             } else {
-                self.allPlaces = placesDB      //?
-                self.placesTableDataSource = self.allPlaces //?
-                
-               self.spinner.hidesWhenStopped = true
+                self.allPlaces = placesDB
+                self.placesTableDataSource = self.allPlaces
+                self.spinner.stopAnimating()
+                self.spinner.hidesWhenStopped = true
                 
                 let timeToLive: TimeInterval = 60 * 60 * 3
                     for placeDB in placesDB {

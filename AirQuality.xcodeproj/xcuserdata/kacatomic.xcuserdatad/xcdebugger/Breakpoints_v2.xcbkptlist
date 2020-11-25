@@ -18,5 +18,101 @@
             endingLineNumber = "15">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "79A4348B-515C-4F0B-8A12-0FA70CAE056C"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AirQuality/DataController/DataController+Measurements.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "getMeasurementsFromAPI(city:parameter:sort:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "79A4348B-515C-4F0B-8A12-0FA70CAE056C - 5135a6e2db5ac331"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AirQuality.DataController.getMeasurementsFromAPI(city: Swift.Optional&lt;Swift.String&gt;, parameter: Swift.Optional&lt;Swift.String&gt;, sort: Swift.Optional&lt;Swift.String&gt;, completion: (Swift.Optional&lt;Swift.Array&lt;AirQuality.Measurements&gt;&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "AirQuality"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kacatomic/Documents/Projects/AirQuality/AirQuality/DataController/DataController+Measurements.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "26"
+                  endingLineNumber = "26"
+                  offsetFromSymbolStart = "1342">
+               </Location>
+               <Location
+                  uuid = "79A4348B-515C-4F0B-8A12-0FA70CAE056C - 7a4d2e4bb0d504bf"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Optional&lt;Foundation.Data&gt;, AirQuality.HTTPStatusCode, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in AirQuality.DataController.getMeasurementsFromAPI(city: Swift.Optional&lt;Swift.String&gt;, parameter: Swift.Optional&lt;Swift.String&gt;, sort: Swift.Optional&lt;Swift.String&gt;, completion: (Swift.Optional&lt;Swift.Array&lt;AirQuality.Measurements&gt;&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "AirQuality"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kacatomic/Documents/Projects/AirQuality/AirQuality/DataController/DataController+Measurements.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "27"
+                  endingLineNumber = "27"
+                  offsetFromSymbolStart = "236">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "756A2E4B-B987-49C1-8885-4CB3AB32F063"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "AirQuality/DataController/DataController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "executeRequest(endpoint:method:queryParams:body:completion:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "756A2E4B-B987-49C1-8885-4CB3AB32F063 - 82b9f6543131c64b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "AirQuality.DataController.executeRequest(endpoint: Swift.String, method: AirQuality.HTTPMethod, queryParams: Swift.Optional&lt;Swift.Dictionary&lt;Swift.String, Swift.String&gt;&gt;, body: Swift.Optional&lt;Foundation.Data&gt;, completion: (Swift.Optional&lt;Foundation.Data&gt;, AirQuality.HTTPStatusCode, Swift.Optional&lt;Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "AirQuality"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kacatomic/Documents/Projects/AirQuality/AirQuality/DataController/DataController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "79"
+                  endingLineNumber = "79"
+                  offsetFromSymbolStart = "3367">
+               </Location>
+               <Location
+                  uuid = "756A2E4B-B987-49C1-8885-4CB3AB32F063 - 8079725bf2f77df7"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Swift.Optional&lt;Foundation.Data&gt;, Swift.Optional&lt;__C.NSURLResponse&gt;, Swift.Optional&lt;Swift.Error&gt;) -&gt; () in AirQuality.DataController.executeRequest(endpoint: Swift.String, method: AirQuality.HTTPMethod, queryParams: Swift.Optional&lt;Swift.Dictionary&lt;Swift.String, Swift.String&gt;&gt;, body: Swift.Optional&lt;Foundation.Data&gt;, completion: (Swift.Optional&lt;Foundation.Data&gt;, AirQuality.HTTPStatusCode, Swift.Optional&lt;Swift.Error&gt;) -&gt; ()) -&gt; ()"
+                  moduleName = "AirQuality"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kacatomic/Documents/Projects/AirQuality/AirQuality/DataController/DataController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "81"
+                  endingLineNumber = "81"
+                  offsetFromSymbolStart = "295">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
