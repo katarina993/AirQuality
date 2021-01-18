@@ -39,8 +39,10 @@
 		6E7B529E251E23CC00352F01 /* AirQuality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E7B529D251E23CC00352F01 /* AirQuality.swift */; };
 		6EACE7A22566D9D4005DE663 /* SpinnerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EACE7A12566D9D4005DE663 /* SpinnerViewController.swift */; };
 		6EACE7A7256BDC8C005DE663 /* MyPlacesMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EACE7A6256BDC8C005DE663 /* MyPlacesMapViewController.swift */; };
+		6EACE7BF25701274005DE663 /* CustomMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EACE7BE25701274005DE663 /* CustomMarker.swift */; };
 		6EBC9A91252E0F0C0050613F /* DataBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EBC9A90252E0F0C0050613F /* DataBaseManager.swift */; };
 		6EF16240253DE3A100657C59 /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6EF1623F253DE3A100657C59 /* Place.swift */; };
+		AE5110162651EF1FCD37E906 /* Pods_AirQuality.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2A07234DADD2F3CB2D86AE5 /* Pods_AirQuality.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,9 +80,11 @@
 		6E7B529D251E23CC00352F01 /* AirQuality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirQuality.swift; sourceTree = "<group>"; };
 		6EACE7A12566D9D4005DE663 /* SpinnerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpinnerViewController.swift; sourceTree = "<group>"; };
 		6EACE7A6256BDC8C005DE663 /* MyPlacesMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPlacesMapViewController.swift; sourceTree = "<group>"; };
+		6EACE7BE25701274005DE663 /* CustomMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMarker.swift; sourceTree = "<group>"; };
 		6EBC9A90252E0F0C0050613F /* DataBaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManager.swift; sourceTree = "<group>"; };
 		6EF1623F253DE3A100657C59 /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
 		A19455110EB8E64DA1036334 /* Pods-AirQuality.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AirQuality.release.xcconfig"; path = "Target Support Files/Pods-AirQuality/Pods-AirQuality.release.xcconfig"; sourceTree = "<group>"; };
+		B2A07234DADD2F3CB2D86AE5 /* Pods_AirQuality.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AirQuality.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C8644E55E09E2D71E87E0915 /* Pods-AirQuality.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AirQuality.debug.xcconfig"; path = "Target Support Files/Pods-AirQuality/Pods-AirQuality.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -89,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AE5110162651EF1FCD37E906 /* Pods_AirQuality.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,6 +112,7 @@
 		6A26F35D0F728CA58247F0AA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B2A07234DADD2F3CB2D86AE5 /* Pods_AirQuality.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -160,6 +166,7 @@
 				6E2FFCFA24E5888500A0E286 /* MeasurementsResponse.swift */,
 				6E7B529D251E23CC00352F01 /* AirQuality.swift */,
 				6EBC9A90252E0F0C0050613F /* DataBaseManager.swift */,
+				6EACE7BE25701274005DE663 /* CustomMarker.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -363,6 +370,7 @@
 				6E2FFCF724E585C500A0E286 /* Coordinates.swift in Sources */,
 				6E7B529E251E23CC00352F01 /* AirQuality.swift in Sources */,
 				6EF16240253DE3A100657C59 /* Place.swift in Sources */,
+				6EACE7BF25701274005DE663 /* CustomMarker.swift in Sources */,
 				6E2FFCE924DD9FC500A0E286 /* CityListTableViewCell.swift in Sources */,
 				6E2FFCD124D401AC00A0E286 /* SplashViewController.swift in Sources */,
 			);
