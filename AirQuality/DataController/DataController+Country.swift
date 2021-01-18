@@ -21,27 +21,18 @@ extension DataController {
             result = result.filter(){!$0.name!.isEmpty}
 
             print(result)
-
-            
-//            for (index, c) in countriesResponse.results.enumerated().reversed() {
-//                if c.name == nil || c.name!.isEmpty {
-//                    countriesResponse.results.remove(at: index)
-//                }
-//            }
-            
             
             completion(result)
-        
             
         } else {
+            
             completion(nil)
             
         }
         
     }
-    
+        
     }
     
 }
-//if let json = json as? [String: Any?] {
-//let result = json.compactMapValues { $0 }
+ 

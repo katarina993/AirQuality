@@ -199,9 +199,10 @@ extension MyPlaceViewController: UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedCity =  self.placesTableDataSource[indexPath.row].city
         let vc = storyboard?.instantiateViewController(identifier: "cityDetail") as! CityDetailViewController
-            vc.cityName = selectedCity
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
+        vc.cityName = selectedCity
+        self.navigationController?.pushViewController(vc, animated: true)
+        
+    }
     func fetchCountries(completion: @escaping ([Country]?) -> Void){
         DataController.shared.getCountriesFromAPI{ (countries) in
             completion(countries)

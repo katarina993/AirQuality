@@ -72,7 +72,7 @@ class DataBaseManager: NSObject {
             let measurementsLocal = try managedContext!.fetch(measurementFetchRequest)
             print(measurementsLocal)
             let measurements = self.convertToList(measurementsLocalList: measurementsLocal)
-           return measurements
+            return measurements
         }
         catch let error as NSError {
             print("Could not fetch. \(error)")

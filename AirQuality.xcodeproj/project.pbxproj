@@ -160,7 +160,6 @@
 				6E2FFCFA24E5888500A0E286 /* MeasurementsResponse.swift */,
 				6E7B529D251E23CC00352F01 /* AirQuality.swift */,
 				6EBC9A90252E0F0C0050613F /* DataBaseManager.swift */,
-				6EACE7A12566D9D4005DE663 /* SpinnerViewController.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -184,6 +183,7 @@
 				6E2FFCE624DCB26100A0E286 /* CityListViewController.swift */,
 				6E2FFD092502E74300A0E286 /* CityDetailViewController.swift */,
 				6EACE7A6256BDC8C005DE663 /* MyPlacesMapViewController.swift */,
+				6EACE7A12566D9D4005DE663 /* SpinnerViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";

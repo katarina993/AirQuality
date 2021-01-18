@@ -24,15 +24,11 @@ class CityListViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.spinner2.startAnimating()
         DataController.shared.getCountriesFromAPI() { countries in
             if countries != nil {
-                DispatchQueue.main.async {
-                    self.spinner2.startAnimating()
-                }
-               
                 self.countries = countries!
-                DispatchQueue.main.async {
+                DispatchQueue.main.sync {
                     self.citiesTableView.reloadData()
                     self.spinner2.hidesWhenStopped = true
                     self.spinner2.stopAnimating()
